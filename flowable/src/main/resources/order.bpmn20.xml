@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:flowable="http://flowable.org/bpmn"
+             targetNamespace="http://example.org/orders">
+  <process id="order" isExecutable="true">
+    <startEvent id="start"/>
+    <sequenceFlow sourceRef="start" targetRef="charge"/>
+    <serviceTask id="charge" flowable:class="lab.ChargeDelegate"/>
+    <sequenceFlow sourceRef="charge" targetRef="approve"/>
+    <userTask id="approve" name="Approve order"/>
+    <sequenceFlow sourceRef="approve" targetRef="end"/>
+    <endEvent id="end"/>
+  </process>
+</definitions>

@@ -1,0 +1,6 @@
+services:
+  zeebe:
+    image: camunda/zeebe:8.5.9
+    ports: ["26500:26500", "9600:9600"]
+    environment:
+      ZEEBE_BROKER_NETWORK_HOST: 0.0.0.0

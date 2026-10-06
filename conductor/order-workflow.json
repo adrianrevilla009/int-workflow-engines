@@ -1,0 +1,29 @@
+{
+  "name": "order_workflow",
+  "version": 1,
+  "schemaVersion": 2,
+  "ownerEmail": "lab@example.org",
+  "inputParameters": ["orderId"],
+  "tasks": [
+    {
+      "name": "charge_payment",
+      "taskReferenceName": "charge",
+      "type": "SIMPLE",
+      "inputParameters": {"orderId": "${workflow.input.orderId}"}
+    },
+    {
+      "name": "wait_approval",
+      "taskReferenceName": "approval",
+      "type": "WAIT"
+    },
+    {
+      "name": "ship",
+      "taskReferenceName": "ship",
+      "type": "HTTP",
+      "inputParameters": {
+        "http_request": {"uri": "http://localhost:8080/health", "method": "GET"}
+      }
+    }
+  ],
+  "outputParameters": {"charged": "${charge.output.ok}"}
+}
